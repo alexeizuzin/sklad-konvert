@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Editor } from './Editor/Editor';
 import './App.css';
 
 function App() {
+  const [transformedText, setTransformedText] = useState('');
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Текст по складам для обучения чтению
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Editor setTransformedText={setTransformedText} />
       </header>
+      <div
+        className="app-sklad-text"
+        dangerouslySetInnerHTML={{ __html: transformedText }}
+      />
     </div>
   );
 }
