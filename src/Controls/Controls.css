@@ -1,0 +1,14 @@
+.Controls {
+  width: 100%;
+  border-bottom: 0.5em rgb(199, 199, 199) solid;
+}
+
+.Controls__button {
+  margin: 0.5em;
+  padding: 0.25em;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  font-weight: bold;
+  font-size: 1.25em;
+}

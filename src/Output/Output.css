@@ -1,0 +1,49 @@
+.Output {
+  font-size: 1rem;
+}
+
+.Output__sklad-text {
+  padding: 0.5em 1em;
+  font-size: 2.5em;
+  text-align: left;
+  color: #282c34;
+}
+
+.Output__size_0 { font-size: 1.5em; }
+.Output__size_1 { font-size: 2em; }
+.Output__size_2 { font-size: 2.5em; }
+.Output__size_3 { font-size: 3em; }
+.Output__size_4 { font-size: 3.5em; }
+.Output__size_5 { font-size: 5em; }
+
+/* sklad */
+.Output__sklad-text i {
+  font-style: normal;
+  display: inline-block;
+  letter-spacing: -0.0125em;
+}
+
+/* dot */
+.Output__sklad-text b {
+  display: inline-block;
+  margin: 0 -0.025em;
+  opacity: 0.25;
+}
+
+/* word */
+.Output__sklad-text span {
+  display: inline-block;
+}
+
+/* space */
+.Output__sklad-text em {
+  display: inline-block;
+  margin-left: 1em;
+}
+
+/* punctuation */
+.Output__sklad-text a {
+  display: inline-block;
+  margin-right: -0.5em;
+}
+

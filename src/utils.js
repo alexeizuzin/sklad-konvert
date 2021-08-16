@@ -6,5 +6,6 @@ export function transformText(text) {
     .replace(re, '<i>$1</i>')
     .replace(/\n/g, '<br/>')
     .replace(/( )/g, '<em>  </em>')
-    .replace(/<\/i><i>/g, '</i><b>·</b><i>');
+    .replace(/<\/i><i>/g, '</i><b>·</b><i>')
+    .replace(/(\.|,|:|\?|!)/g, '<a>$1</a>');
 }
