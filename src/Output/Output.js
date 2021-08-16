@@ -13,13 +13,24 @@ const defaultSize = 2;
 const activeColor = 'red';
 
 let U;
+let voices;
+let defaultVoiceIndex;
+
 if (SpeechSynthesisUtterance) {
   U = new SpeechSynthesisUtterance();
+  voices = speechSynthesis.getVoices();
+  speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices().filter((voice) => voice.lang.includes('ru'));
+    defaultVoiceIndex = voices.findIndex(
+      (voice) => voice.name === 'Google русский',
+    );
+  }
 }
 
 function convertTextToSpeech(sklad) {
   if (!sklad || !U) return;
   U.text = sklad;
+  U.voice = voices[defaultVoiceIndex] || voices[0];
   speechSynthesis.speak(U);
 }
 
@@ -28,7 +39,7 @@ const handleTextClick = (event) => {
   if (event.target.tagName.toLowerCase() === 'i') {
     sklad = event.target.innerText;
     if (sklad.length === 1) {
-      sklad = sklad + 'ъ';
+      sklad = sklad + sklad; // + 'ъ'
     }
     event.target.style.color = activeColor;
     setTimeout(() => {
