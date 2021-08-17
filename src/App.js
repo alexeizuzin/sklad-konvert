@@ -52,6 +52,7 @@ function App() {
         text={transformedText}
         fontSize={fontSize}
       />
+      <div className="App-footer" />
     </div>
   );
 }

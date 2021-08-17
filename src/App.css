@@ -1,5 +1,9 @@
 .App {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
   text-align: center;
+  padding-bottom: 4em;
 }
 
 .App-logo {
@@ -22,6 +26,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cecece;
+  height: 3em;
 }
 
 .App-link {

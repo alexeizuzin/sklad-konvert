@@ -1,6 +1,6 @@
 .Controls {
   width: 100%;
-  border-bottom: 0.5em rgb(199, 199, 199) solid;
+  border-bottom: 0.5em #cecece solid;
 }
 
 .Controls__button {

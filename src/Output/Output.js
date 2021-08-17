@@ -29,8 +29,11 @@ if (SpeechSynthesisUtterance) {
 
 function convertTextToSpeech(sklad) {
   if (!sklad || !U) return;
-  U.text = sklad;
+  U.text = `${sklad}!`;
+  U.lang = 'ru-RU';
   U.voice = voices[defaultVoiceIndex] || voices[0];
+  // console.log(' v> ', U);
+  // alert(U?.voice?.name + '_' + U?.voice?.lang + '_' + voices.length);
   speechSynthesis.speak(U);
 }
 
@@ -39,12 +42,12 @@ const handleTextClick = (event) => {
   if (event.target.tagName.toLowerCase() === 'i') {
     sklad = event.target.innerText;
     if (sklad.length === 1) {
-      sklad = sklad + sklad; // + 'ъ'
+      sklad = sklad + sklad;
     }
     event.target.style.color = activeColor;
     setTimeout(() => {
       event.target.style.color = 'unset';
-    }, 800);
+    }, 1000);
   }
   convertTextToSpeech(sklad);
 }
