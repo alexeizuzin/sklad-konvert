@@ -1,6 +1,8 @@
 import React from 'react';
+import { checkText } from './../utils';
 import './Output.css';
 
+const langRu = 'ru-RU';
 const fontClasses = [
   'Output__size_0',
   'Output__size_1',
@@ -11,6 +13,7 @@ const fontClasses = [
 ];
 const defaultSize = 2;
 const activeColor = 'red';
+const inactiveColor = 'gray';
 
 let U;
 let voices;
@@ -29,22 +32,17 @@ if (SpeechSynthesisUtterance) {
 
 function convertTextToSpeech(sklad) {
   if (!sklad || !U) return;
-  U.text = `${sklad}!`;
-  U.lang = 'ru-RU';
+  U.text = sklad;
+  U.lang = langRu;
   U.voice = voices[defaultVoiceIndex] || voices[0];
-  // console.log(' v> ', U);
-  // alert(U?.voice?.name + '_' + U?.voice?.lang + '_' + voices.length);
   speechSynthesis.speak(U);
 }
 
 const handleTextClick = (event) => {
   let sklad;
   if (event.target.tagName.toLowerCase() === 'i') {
-    sklad = event.target.innerText;
-    if (sklad.length === 1) {
-      sklad = sklad + sklad;
-    }
-    event.target.style.color = activeColor;
+    sklad = checkText(event.target.innerText);
+    event.target.style.color = sklad ? activeColor : inactiveColor;
     setTimeout(() => {
       event.target.style.color = 'unset';
     }, 1000);
