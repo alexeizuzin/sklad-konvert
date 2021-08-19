@@ -1,3 +1,5 @@
+import Eyo from 'eyo-kernel';
+
 const alphabetPhonemes = {
   а: 'a',
   б: '',
@@ -44,10 +46,32 @@ const alphabetPhonemes = {
   не: 'ньэ',
 };
 
+const safeEyo = new Eyo();
+let dictLoaded = false;
+
+loadDict('./safe.txt', safeEyo);
+
 const re = new RegExp(/([бБвВгГдДжЖзЗкКлЛмМнНпПрРсСтТфФхХцЦчЧшщЩ][аАяЯоОёЁуУюЮыЫиИэЭеЕьъ]|[А-Яа-яёЁ])/, 'g');
 
+function loadDict(path, dict) {
+  const req = new XMLHttpRequest();
+  req.responseType = 'text';
+  req.addEventListener('load', () => {
+      dict.dictionary.set(req.responseText);
+      dictLoaded = true;
+  });
+  
+  req.open('GET', path, true);
+  req.send();    
+}
+
 export function transformText(text) {
-  return text
+  const linted = dictLoaded ? safeEyo.lint(text) : [];
+  //console.log(' --> ', safeEyo.lint(text));
+  const lintedText = linted.reduce((acc, item) => {
+    return acc.replace(item.before, item.after);
+  }, text);
+  return lintedText
     .replace(/(\w+|[А-Яа-яёЁ]+)/g, '<span>$1</span>')
     .replace(re, '<i data-content="$1">$1</i>')
     .replace(/\n/g, '<br/>')
