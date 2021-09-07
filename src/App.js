@@ -7,9 +7,12 @@ import { Output } from './Output/Output';
 import './App.css';
 
 function App() {
+  const [text, setText] = useState(undefined);
   const [transformedText, setTransformedText] = useState('');
   const [fontSize, setFontSize] = useState(Output.DefaultFontSize);
   const [isFormVisible, setIsFormVisible] = useState(true);
+  const [fontFamilyType, setFontFamilyType] = useState(Output.fontFamilyTypes.roboto);
+  const [caps, setCaps] = useState(false);
 
   const incrementFontSize = () => {
     if (fontSize >= Output.MaxFontSize) {
@@ -32,25 +35,36 @@ function App() {
           <p>
             Текст по складам для обучения чтению
           </p>
-          <Editor setTransformedText={setTransformedText} />
+          <Editor
+            text={ text }
+            setText={ setText }
+            setTransformedText={setTransformedText}
+          />
         </header>
       )}
 
       <Controls
-        decrementFontSize={decrementFontSize}
-        incrementFontSize={incrementFontSize}
+        caps={caps}
+        decrementFontSize={ decrementFontSize }
+        incrementFontSize={ incrementFontSize }
         isFormVisible={isFormVisible}
-        hideForm={() => {
+        hideForm={ () => {
           setIsFormVisible(false);
-        }}
-        showForm={() => {
+        } }
+        showForm={ () => {
           setIsFormVisible(true);
-        }}
+        } }
+        setCapsOn={ () => { setCaps(true) } }
+        setCapsOff={ () => { setCaps(false) } }
+        setRoboto={ () => { setFontFamilyType(Output.fontFamilyTypes.roboto) } }
+        setPlayfair={ () => { setFontFamilyType(Output.fontFamilyTypes.playfair) } }
       />
 
       <Output
-        text={transformedText}
+        caps={caps}
+        fontFamilyType={fontFamilyType}
         fontSize={fontSize}
+        text={transformedText}
       />
       <div className="App-footer" />
     </div>

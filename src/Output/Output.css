@@ -2,6 +2,18 @@
   font-size: 1rem;
 }
 
+.Output__playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.Output__roboto {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.Output__caps {
+  text-transform: uppercase;
+}
+
 .Output__sklad-text {
   padding: 0.5em 1em;
   font-size: 2.5em;

@@ -4,15 +4,16 @@ import './Editor.css';
 const defaultText = 'Без труда не вынешь и рыбку из пруда';
 
 export function Editor(props) {
-  const { setTransformedText } = props;
+  const { setText, setTransformedText, text = defaultText } = props;
 
   const changeTextHandler = (event) => {
+    setText(event.target.value);
     setTransformedText(transformText(event.target.value));
   };
 
   useEffect(() => {
-    setTransformedText(transformText(defaultText));
-  }, [setTransformedText]);
+    setTransformedText(transformText(text));
+  }, [setTransformedText, text]);
 
   return (
     <div className="Editor">
@@ -21,7 +22,7 @@ export function Editor(props) {
           autoFocus
           className="Editor_input-area"
           onChange={changeTextHandler}
-          defaultValue={defaultText}
+          defaultValue={text}
         />
       </div>
     </div>

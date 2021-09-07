@@ -1,6 +1,48 @@
 import Eyo from 'eyo-kernel';
 
 const alphabetPhonemes = {
+  б: '',
+  в: '',
+  г: '',
+  д: '',
+
+  ж: 'жъ',
+  з: '',
+
+  й: 'ий',
+  к: 'къ',
+  л: 'лъ',
+  м: 'мъ',
+  н: 'нъ',
+
+  п: 'пъ',
+  р: 'ръ',
+  с: 'съ',
+  т: 'тъ',
+
+  ф: 'фъ',
+  х: 'хъ',
+  ц: 'цъ',
+  ч: 'чь',
+  ш: 'шь',
+  щ: 'щъ',
+  ь: '',
+  ъ: '',
+
+  гу: 'г-у',
+  до: 'д-о',
+  дь: '',
+  // ке: 'ке',
+  ко: 'к-о',
+  ли: 'льли',
+  ло: 'лъоо',
+  мо: 'м-о',
+  ни: 'нь-и',
+  по: 'п-о',
+  ре: 'рьэ',
+};
+
+const alphabetPhonemes2 = {
   а: 'a',
   б: '',
   в: '',
@@ -40,10 +82,10 @@ const alphabetPhonemes = {
   ки: 'кии',
   ко: '',
   ло: 'лоо',
-  ме: 'меэ',
+  ме: '',
   му: 'moon',
   ту: 'туу',
-  не: 'ньэ',
+  не: '',
 };
 
 const safeEyo = new Eyo();
@@ -82,9 +124,9 @@ export function transformText(text) {
 
 export function checkText(sklad) {
   const filtered = alphabetPhonemes[sklad.toLowerCase()];
-  if (sklad.includes('ь') || sklad.includes('ъ')) {
-    return '';
-  }
+  // if (sklad.includes('ь') || sklad.includes('ъ')) {
+  //   return '';
+  // }
 
-  return filtered !== undefined ? filtered : sklad;
+  return (filtered !== undefined ? filtered : sklad).toLowerCase();
 }

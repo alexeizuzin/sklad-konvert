@@ -14,6 +14,10 @@ const fontClasses = [
 const defaultSize = 2;
 const activeColor = 'red';
 const inactiveColor = 'gray';
+const fontFamilyTypes = {
+  roboto: 'Output__roboto',
+  playfair: 'Output__playfair',
+};
 
 let U;
 let voices;
@@ -21,20 +25,21 @@ let defaultVoiceIndex;
 
 if (SpeechSynthesisUtterance) {
   U = new SpeechSynthesisUtterance();
-  voices = speechSynthesis.getVoices();
+  speechSynthesis.getVoices();
   speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices().filter((voice) => voice.lang.includes('ru'));
     defaultVoiceIndex = voices.findIndex(
-      (voice) => voice.name === 'Google русский',
+      (voice) => voice.name === 'Milena',
     );
   }
 }
 
 function convertTextToSpeech(sklad) {
-  if (!sklad || !U) return;
+  if (!sklad || !U || !voices) return;
   U.text = sklad;
   U.lang = langRu;
-  U.voice = voices[defaultVoiceIndex] || voices[0];
+  U.voice = voices[defaultVoiceIndex];
+  // console.log(' voices -> ', voices);
   speechSynthesis.speak(U);
 }
 
@@ -51,12 +56,17 @@ const handleTextClick = (event) => {
 }
 
 export function Output(props) {
-  const { text, fontSize } = props;
+  const {
+    caps,
+    fontFamilyType = fontFamilyTypes.roboto,
+    fontSize,
+    text,
+  } = props;
 
   return (
     <div className="Output">
       <div
-        className={'Output__sklad-text ' + fontClasses[fontSize ?? defaultSize] }
+        className={`Output__sklad-text ${fontClasses[fontSize ?? defaultSize]} ${fontFamilyType}  ${caps && 'Output__caps'}`}
         dangerouslySetInnerHTML={{ __html: text }}
         onClick={handleTextClick}
       />
@@ -67,3 +77,4 @@ export function Output(props) {
 Output.MaxFontSize = fontClasses.length - 1;
 Output.MinFontSize = 0;
 Output.DefaultFontSize = defaultSize;
+Output.fontFamilyTypes = fontFamilyTypes;
